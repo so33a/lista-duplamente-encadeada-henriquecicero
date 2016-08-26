@@ -2,15 +2,19 @@
 #include <stdlib.h>
 #include "listaDupla.h"
 
-
 int main () {
   ListaDupla l = inicializa();
+  ListaDupla lst;
   link aux, aux2, menor;
-  insereDepois(l, l->head, aux= novoNo(12, NULL, NULL));
+  insereDepois(l, l->head, aux= novoNo(42, NULL, NULL));
   aux2 = novoNo(21, NULL, NULL);
   insereDepois(l,aux,aux2);
-  aux = novoNo(42, NULL, NULL); 
+  aux = novoNo(12, NULL, NULL); 
   insereDepois(l, aux2, aux);
+  imprime(l);
+  menor = buscarMenor (l);
+  printf ("\nmenor %d \n", menor->item);
+  l = ordenar (l);
   imprime(l);
   imprimeReverso(l);
   printf ("\nremovendo %d \n", aux2->item);
@@ -18,8 +22,6 @@ int main () {
     removeNo(aux2);
   imprime(l);
   destroiLista(l);
-  menor = buscarMenorElemento (l);
-  l = ordernar (l);
 
   return 0;
 }
