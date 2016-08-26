@@ -21,11 +21,12 @@ link novoNo (int item, link prev, link next) {
 ListaDupla inicializa() {
   ListaDupla aux;
   aux = malloc(sizeof *aux);
-  aux->head = NULL;
   aux->z = novoNo(0, NULL, NULL);
+  aux->head = aux->z;
+  aux->z->next = aux->head;
+  aux->z->prev = aux->head;
   return aux;
 }
-
 void insereDepois (ListaDupla l, link x, link t) {
   if (x == NULL) {
     l->head = t;
@@ -91,3 +92,27 @@ void destroiLista(ListaDupla l) {
   free(l);
 }
 
+link buscarMenorElemento (ListaDupla l) {
+  link menor;
+  link t = l->head;
+  while (t != l->z) {        
+    if(t->item < menor->item)
+      menor = t;
+    t = t->next;
+  }
+  return menor;
+}
+
+ListaDupla ordenar (ListaDupla l) {
+  ListaDupla lst = l;
+  link x = lst->head;
+  link menor;
+
+  while (x != lst->z) {
+    menor = buscarMenorElemento (l);
+    removeNo (menor);
+    x = menor;
+    x = x->next;
+  }
+  return lst;
+}
