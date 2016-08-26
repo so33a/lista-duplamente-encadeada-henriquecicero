@@ -5,7 +5,7 @@
 
 int main () {
   ListaDupla l = inicializa();
-  link aux, aux2;
+  link aux, aux2, menor;
   insereDepois(l, l->head, aux= novoNo(12, NULL, NULL));
   aux2 = novoNo(21, NULL, NULL);
   insereDepois(l,aux,aux2);
@@ -18,6 +18,8 @@ int main () {
     removeNo(aux2);
   imprime(l);
   destroiLista(l);
+  menor = buscarMenorElemento (l);
+  l = ordernar (l);
 
   return 0;
 }
