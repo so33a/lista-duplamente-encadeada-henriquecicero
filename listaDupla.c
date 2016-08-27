@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include "listaDupla.h"
 
-
-
-
 link novoNo (int item, link prev, link next) {
   link aux = malloc(sizeof(struct node));
   if (aux == NULL) {
@@ -16,7 +13,6 @@ link novoNo (int item, link prev, link next) {
   aux->next = next;
   return aux;
 }
-
 
 ListaDupla inicializa() {
   ListaDupla aux;
@@ -46,6 +42,7 @@ link removeNo (link x) {
   x->next->prev = x->prev;
   return x;
 }
+
 void imprimeReverso(ListaDupla l) {
   link t = l->z->prev;
   while ( t != l->z ) {
@@ -54,7 +51,6 @@ void imprimeReverso(ListaDupla l) {
   }
   printf("\n");
 }
-
 
 void imprime(ListaDupla l) {
   link t = l->head;
@@ -74,6 +70,7 @@ link buscar(ListaDupla l, int item) {
   }
   return NULL;
 }
+
 /* 
 void insereAntes (ListaDupla l, link x, link t);
 */
@@ -95,10 +92,10 @@ link buscarMenor (ListaDupla l) {
   link t = l->head;
   link menor;
 
-if (t == l->z)
-  return NULL;
-else
-  menor = t;
+  if (t == l->z)
+    return NULL;
+  else
+    menor = t;
 
   while (t != l->z) {
     if(t->item < menor->item) {
@@ -111,19 +108,19 @@ else
 
 ListaDupla ordenar (ListaDupla l) {
   ListaDupla lst = inicializa();
-  link x = lst->head;
   link t = l->head;
-  link menor, aux;
+  link menor;
 
   if (t == l->z)
     return NULL;
   else {
     while (t != l->z) {
       menor = buscarMenor (l);
-      insereDepois(lst, lst->z->next, aux = novoNo (menor->item, menor->prev, menor->next));
-      t = t->next;
+      insereDepois(lst, lst->z->prev, novoNo (menor->item, menor->prev, menor->next));
       removeNo (menor);
+      t = t->next;
     }
+    insereDepois(lst, lst->z->prev, novoNo (l->head->item, l->head->prev, l->head->next));
     destroiLista (l);
     return lst;
   }
