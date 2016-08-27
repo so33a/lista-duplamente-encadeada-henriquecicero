@@ -125,3 +125,22 @@ ListaDupla ordenar (ListaDupla l) {
     return lst;
   }
 }
+
+ListaDupla insertionSort (ListaDupla l) {
+    link t = l->head;
+    link x;
+    int y;
+
+    while (t != l->z) {
+        x = t->prev;
+        y = t->item;
+
+        while (x != l->z && x->item > y) {
+            x->next->item =  x->item;
+            x = x->prev;
+        }
+        x->next->item = y;
+        t = t->next;
+    }
+    return l;
+}
